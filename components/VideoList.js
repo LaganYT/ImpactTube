@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import '../styles/VideoList.module.css'; // Import the new CSS file
 
 export default function VideoList({ videos, onVideoClick }) {
   return (
@@ -10,33 +11,6 @@ export default function VideoList({ videos, onVideoClick }) {
           </Link>
         </div>
       ))}
-      <style jsx>{`
-        .video-list {
-          margin-top: 20px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        .video-item {
-          padding: 10px;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          background-color: #fff;
-          transition: transform 0.2s;
-        }
-        .video-item:hover {
-          transform: scale(1.02);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .video-item a {
-          color: #1e90ff;
-          text-decoration: none;
-          font-weight: bold;
-        }
-        .video-item a:hover {
-          text-decoration: underline;
-        }
-      `}</style>
     </div>
   );
 }
