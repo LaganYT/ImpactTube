@@ -20,7 +20,7 @@
 
 ## Using Alternative YouTube Search Packages
 
-This project uses alternative YouTube search packages to fetch video results. The search functionality is implemented in the `utils/youtubeSearch.js` file.
+This project uses the @distube/ytsr package to fetch video results. The search functionality is implemented in the `utils/youtubeSearch.js` file.
 
 ## Getting the URL of Selected Videos
 

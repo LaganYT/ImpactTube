@@ -24,7 +24,7 @@ export default function VideoList({ videos, onVideoClick }) {
           margin-bottom: 10px;
         }
         .video-item a {
-          color: blue;
+          color: #1e90ff;
           text-decoration: none;
         }
         .video-item a:hover {
