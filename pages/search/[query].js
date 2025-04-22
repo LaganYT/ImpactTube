@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import VideoList from '../../components/VideoList';
-import ytsr from '@distube/ytsr'; // Import @distube/ytsr
 
 export default function SearchResults() {
   const router = useRouter();
@@ -10,20 +9,18 @@ export default function SearchResults() {
 
   useEffect(() => {
     if (query) {
-      searchVideos(query).then(setVideos).catch(console.error);
+      fetchVideos(query).then(setVideos).catch(console.error);
     }
   }, [query]);
 
-  const searchVideos = async (query) => {
+  const fetchVideos = async (query) => {
     try {
-      const results = await ytsr(query, { limit: 25 }); // Fetch search results
-      return results.items
-        .filter((item) => item.type === 'video') // Only include videos
-        .map((video) => ({
-          id: video.id,
-          title: video.name,
-          url: video.url,
-        }));
+      const response = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch videos');
+      }
+      const data = await response.json();
+      return data.videos;
     } catch (error) {
       console.error('Error fetching videos:', error);
       return [];
