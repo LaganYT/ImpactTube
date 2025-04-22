@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import VideoList from '../../components/VideoList';
-import ytSearch from 'yt-search';
+import yts from 'yt-search'; // Ensure correct import
 
 export default function SearchResults() {
   const router = useRouter();
@@ -16,8 +16,8 @@ export default function SearchResults() {
 
   const searchVideos = async (query) => {
     try {
-      const { videos } = await ytSearch(query);
-      return videos.map((video) => ({
+      const results = await yts(query); // Fetch search results
+      return results.videos.map((video) => ({
         id: video.videoId,
         title: video.title,
         url: `https://www.youtube.com/watch?v=${video.videoId}`,
