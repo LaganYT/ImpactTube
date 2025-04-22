@@ -1,5 +1,5 @@
 {
-  "name": "impacttube",
+  "name": "impact-tube",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -11,7 +11,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "axios": "^0.21.1",
+    "axios": "latest",
     "yt-search": "latest"
   }
 }

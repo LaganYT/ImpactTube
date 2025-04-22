@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import VideoList from '../../components/VideoList';
+import ytSearch from 'yt-search';
 
 export default function SearchResults() {
   const router = useRouter();
@@ -14,11 +15,17 @@ export default function SearchResults() {
   }, [query]);
 
   const searchVideos = async (query) => {
-    // Replace with actual API call
-    return [
-      { id: '1', title: `Result for ${query}`, url: 'https://www.youtube.com/watch?v=1' },
-      { id: '2', title: `Another result for ${query}`, url: 'https://www.youtube.com/watch?v=2' },
-    ];
+    try {
+      const { videos } = await ytSearch(query);
+      return videos.map((video) => ({
+        id: video.videoId,
+        title: video.title,
+        url: `https://www.youtube.com/watch?v=${video.videoId}`,
+      }));
+    } catch (error) {
+      console.error('Error fetching videos:', error);
+      return [];
+    }
   };
 
   return (
