@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import '../styles/VideoList.module.css'; // Import the new CSS file
 
 export default function VideoList({ videos, onVideoClick }) {
   return (

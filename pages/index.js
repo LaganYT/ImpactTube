@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import SearchBar from '../components/SearchBar';
 import VideoList from '../components/VideoList';
-import '../styles/Home.module.css'; // Import the new CSS file
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
