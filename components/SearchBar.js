@@ -8,7 +8,11 @@ export default function SearchBar({ onSearch }) {
   };
 
   const handleSearch = () => {
-    onSearch(query);
+    try {
+      onSearch(query);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

@@ -7,8 +7,12 @@ export default function Home() {
   const [selectedVideoUrl, setSelectedVideoUrl] = useState('');
 
   const handleSearch = async (query) => {
-    const results = await searchVideos(query);
-    setVideos(results);
+    try {
+      const results = await searchVideos(query);
+      setVideos(results);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleVideoClick = (url) => {
