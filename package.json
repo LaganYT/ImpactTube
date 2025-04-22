@@ -13,6 +13,7 @@
     "react-dom": "latest",
     "axios": "^0.21.1",
     "@distube/ytsr": "latest",
-    "next-transpile-modules": "latest"
+    "next-transpile-modules": "latest",
+    "yt-search": "latest"
   }
 }
