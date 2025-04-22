@@ -15,6 +15,7 @@ export default async function handler(req, res) {
         id: video.id,
         title: video.name,
         url: video.url,
+        thumbnail: video.bestThumbnail.url, // Add thumbnail
       }));
 
     res.status(200).json({ videos });

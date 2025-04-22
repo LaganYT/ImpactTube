@@ -16,12 +16,13 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', gap: '10px' }}>
       <input
         type="text"
         value={query}
         onChange={handleInputChange}
         placeholder="Search for videos"
+        style={{ flex: 1 }}
       />
       <button onClick={handleSearch}>Search</button>
     </div>

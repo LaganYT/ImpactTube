@@ -5,6 +5,7 @@ export default function VideoList({ videos, onVideoClick }) {
     <div className="video-list">
       {videos.map((video) => (
         <div key={video.id} className="video-item">
+          <img src={video.thumbnail} alt={video.title} />
           <Link href={`/watch?v=${video.id}`}>
             {video.title}
           </Link>
