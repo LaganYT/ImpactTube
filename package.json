@@ -12,6 +12,11 @@
     "react": "latest",
     "react-dom": "latest",
     "axios": "latest",
-    "@distube/ytsr": "latest"
+    "@distube/ytsr": "latest",
+    "fs": "latest",
+    "fs-extra": "latest",
+    "path": "latest",
+    "stream": "latest",
+    "util": "latest"
   }
 }
