@@ -12,7 +12,9 @@
     "react": "latest",
     "react-dom": "latest",
     "axios": "latest",
-    "yt-search": "latest",
+    "yt-search": "latest"
+  },
+  "devDependencies": {
     "cheerio": "latest"
   }
 }
