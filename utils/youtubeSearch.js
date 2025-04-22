@@ -15,3 +15,8 @@ export const searchVideos = async (query) => {
     return [];
   }
 };
+
+// Workaround to avoid using 'fs' and 'async_hooks' modules
+if (typeof window !== 'undefined') {
+  window.require = () => {};
+}
