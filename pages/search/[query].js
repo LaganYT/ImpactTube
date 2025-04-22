@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import VideoList from '../../components/VideoList';
-import yts from 'yt-search'; // Ensure correct import
+import yts from '@types/yt-search'; // Ensure correct import
 
 export default function SearchResults() {
   const router = useRouter();
