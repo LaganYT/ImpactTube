@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import VideoList from '../../components/VideoList';
-import yts from '@types/yt-search'; // Ensure correct import
+import ytsr from '@distube/ytsr'; // Import @distube/ytsr
 
 export default function SearchResults() {
   const router = useRouter();
@@ -16,12 +16,14 @@ export default function SearchResults() {
 
   const searchVideos = async (query) => {
     try {
-      const results = await yts(query); // Fetch search results
-      return results.videos.map((video) => ({
-        id: video.videoId,
-        title: video.title,
-        url: `https://www.youtube.com/watch?v=${video.videoId}`,
-      }));
+      const results = await ytsr(query, { limit: 25 }); // Fetch search results
+      return results.items
+        .filter((item) => item.type === 'video') // Only include videos
+        .map((video) => ({
+          id: video.id,
+          title: video.name,
+          url: video.url,
+        }));
     } catch (error) {
       console.error('Error fetching videos:', error);
       return [];
