@@ -1,15 +1,14 @@
-import ytsr from '@distube/ytsr';
+import ytSearch from 'yt-search';
 
 export const searchVideos = async (query) => {
   try {
-    const searchResults = await ytsr(query, { limit: 10 });
-    return searchResults.items
-      .filter((item) => item.type === 'video')
-      .map((item) => ({
-        id: item.id,
-        title: item.title,
-        url: item.url,
-      }));
+    const result = await ytSearch(query);
+
+    return result.videos.map((video) => ({
+      id: video.videoId,
+      title: video.title,
+      url: video.url,
+    }));
   } catch (error) {
     console.error('Error searching for videos:', error);
     return [];
