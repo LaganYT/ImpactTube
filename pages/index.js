@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import VideoList from '../components/VideoList';
-import { searchVideos } from '../utils/youtubeSearch';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);

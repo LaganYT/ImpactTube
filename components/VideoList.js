@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function VideoList({ videos, onVideoClick }) {
   return (
     <div className="video-list">
