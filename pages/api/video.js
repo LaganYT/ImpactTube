@@ -8,9 +8,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    const result = await ytSearch({ videoId });
-    if (result && result.videos && result.videos.length > 0) {
-      return res.status(200).json(result.videos[0]); // Return the first video
+    const result = await ytSearch({ videoId }); // Correctly pass videoId to ytSearch
+    if (result && result.title) {
+      return res.status(200).json(result); // Return the video details directly
     } else {
       return res.status(404).json({ error: 'Video not found' });
     }
