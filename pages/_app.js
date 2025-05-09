@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      router.push(`/api/search?query=${encodeURIComponent(searchQuery)}`);
+      router.push(`/search/${encodeURIComponent(searchQuery)}`);
     }
   };
 
