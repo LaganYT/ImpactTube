@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import ytSearch from 'yt-search';
+import cheerio from 'cheerio';
 
 export default function Watch() {
   const router = useRouter();

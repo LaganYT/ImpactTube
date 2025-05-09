@@ -12,6 +12,7 @@
     "react": "latest",
     "react-dom": "latest",
     "axios": "latest",
-    "@distube/ytsr": "latest"
+    "@distube/ytsr": "latest",
+    "cheerio": "latest"
   }
 }
