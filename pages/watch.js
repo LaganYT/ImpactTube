@@ -59,8 +59,8 @@ export default function Watch() {
 
         {videoData && !loading && (
           <>
-            <h2>{videoData.title}</h2>
-            <p>{videoData.description}</p>
+            <h2 dangerouslySetInnerHTML={{ __html: videoData.title }}></h2>
+            <p dangerouslySetInnerHTML={{ __html: videoData.description }}></p>
             <p>
               Channel:{' '}
               <a
@@ -68,9 +68,8 @@ export default function Watch() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: '#4EA8DE' }}
-              >
-                {videoData.author.name}
-              </a>
+                dangerouslySetInnerHTML={{ __html: videoData.author.name }}
+              ></a>
             </p>
           </>
         )}
