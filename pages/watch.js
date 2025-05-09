@@ -63,7 +63,7 @@ export default function Watch() {
             <p>
               {' '}
               <a
-                href={`https://www.youtube.com/channel/${videoData.author.id}`}
+                href={`${videoData.author.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: '#4EA8DE' }}
