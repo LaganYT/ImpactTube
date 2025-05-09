@@ -7,22 +7,26 @@ export default function Watch() {
   const { v } = router.query;
   const [videoData, setVideoData] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);  // Add loading state
 
   useEffect(() => {
     if (!v) return;
 
     const fetchVideoDetails = async () => {
-      try {
-        const res = await ytSearch({ videoId: v });
-        const video = res.videos[0]; // Get the first video from the result
+      setLoading(true);  // Start loading
+      setError(null); // Clear previous errors
 
-        if (video) {
-          setVideoData(video);
+      try {
+        const res = await ytSearch({ videoId: v }); // Ensure yt-search returns a video response
+        if (res && res.videos && res.videos.length > 0) {
+          setVideoData(res.videos[0]); // Assuming the first video is the correct one
         } else {
           setError('Video not found');
         }
       } catch (err) {
         setError('Failed to fetch video data');
+      } finally {
+        setLoading(false);  // Stop loading
       }
     };
 
@@ -47,9 +51,10 @@ export default function Watch() {
       </div>
 
       <div style={{ width: '80%', maxWidth: '1200px', marginTop: '20px' }}>
+        {loading && <p>Loading video details...</p>}  {/* Show loading message for video details */}
         {error && <p>{error}</p>}
 
-        {videoData && (
+        {videoData && !loading && (
           <>
             <h2>{videoData.title}</h2>
             <p>{videoData.description}</p>
