@@ -60,8 +60,9 @@ export default function Watch() {
         {videoData && !loading && (
           <>
             <h2 dangerouslySetInnerHTML={{ __html: videoData.title }}></h2>
+            <p dangerouslySetInnerHTML={{ __html: videoData.description }}></p>
             <p>
-              {' '}
+              Channel:{' '}
               <a
                 href={`https://www.youtube.com/channel/${videoData.author.id}`}
                 target="_blank"
@@ -70,7 +71,6 @@ export default function Watch() {
                 dangerouslySetInnerHTML={{ __html: videoData.author.name }}
               ></a>
             </p>
-            <p dangerouslySetInnerHTML={{ __html: videoData.description }}></p>
           </>
         )}
       </div>

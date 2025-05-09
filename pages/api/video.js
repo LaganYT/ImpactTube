@@ -14,6 +14,10 @@ export default async function handler(req, res) {
       if (result.description) {
         result.description = result.description.replace(/\n/g, '<br>');
       }
+      if (result.author && result.author.url) {
+        const authorIdMatch = result.author.url.match(/channel\/([^/]+)/);
+        result.author.id = authorIdMatch ? authorIdMatch[1] : null; // Extract author ID from URL
+      }
       return res.status(200).json(result); // Return the modified video details
     } else {
       return res.status(404).json({ error: 'Video not found' });
