@@ -1,3 +1,4 @@
+/* Global Reset and Base Styles */
 body {
   margin: 0;
   padding: 0;
@@ -15,9 +16,9 @@ a {
   box-sizing: border-box;
 }
 
-/* Styles from Home.module.css */
+/* Layout Container */
 .container {
-  max-width: 1200px; /* Wider container for better layout */
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   background-color: #202020; /* Slightly lighter background for contrast */
@@ -28,6 +29,7 @@ a {
   line-height: 1.6;
 }
 
+/* Typography */
 .title {
   text-align: center;
   color: #ff0000; /* YouTube-inspired red */
@@ -35,26 +37,28 @@ a {
   margin-bottom: 30px;
 }
 
+/* Video Player Section */
 .video-player {
   margin-top: 20px;
   text-align: center;
-  background-color: #282828; /* Slightly lighter for separation */
+  background-color: #282828;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
-/* Styles from VideoList.module.css */
+/* Video List Grid */
 .video-list {
   margin-top: 30px;
   display: flex;
-  flex-wrap: wrap; /* Wrap items for responsiveness */
+  flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
 
+/* Individual Video Item */
 .video-item {
-  width: 300px; /* Fixed width for uniformity */
+  width: 300px;
   padding: 15px;
   border: 1px solid #333;
   border-radius: 8px;
@@ -72,7 +76,7 @@ a {
 }
 
 .video-item a {
-  color: #ff0000; /* YouTube-inspired red */
+  color: #ff0000;
   text-decoration: none;
   font-weight: bold;
   font-size: 1.2rem;
@@ -89,9 +93,9 @@ a {
   margin-bottom: 10px;
 }
 
-/* Additional global styles for buttons and inputs */
+/* Buttons */
 button {
-  background-color: #ff0000; /* YouTube-inspired red */
+  background-color: #ff0000;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -102,9 +106,10 @@ button {
 }
 
 button:hover {
-  background-color: #cc0000; /* Darker red on hover */
+  background-color: #cc0000;
 }
 
+/* Input Fields */
 input {
   width: 100%;
   padding: 10px;
@@ -117,4 +122,13 @@ input {
 
 input::placeholder {
   color: #888888;
+}
+
+/* Footer Styles */
+footer {
+  border-top: 1px solid #333;
+  padding: 1rem;
+  background-color: #111;
+  text-align: center;
+  font-size: 0.9rem;
 }
