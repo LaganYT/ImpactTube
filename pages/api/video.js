@@ -10,7 +10,11 @@ export default async function handler(req, res) {
   try {
     const result = await ytSearch({ videoId }); // Correctly pass videoId to ytSearch
     if (result && result.title) {
-      return res.status(200).json(result); // Return the video details directly
+      // Replace /n with <br> in the description or other text fields
+      if (result.description) {
+        result.description = result.description.replace(/\n/g, '<br>');
+      }
+      return res.status(200).json(result); // Return the modified video details
     } else {
       return res.status(404).json({ error: 'Video not found' });
     }
