@@ -1,4 +1,4 @@
-import ytsr from '@distube/ytsr';
+import ytSearch from 'yt-search';
 
 export default async function handler(req, res) {
   const { query } = req.query;
@@ -8,15 +8,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const results = await ytsr(query, { limit: 25 });
-    const videos = results.items
-      .filter((item) => item.type === 'video')
-      .map((video) => ({
-        id: video.id,
-        title: video.name,
-        url: video.url,
-        thumbnail: video.bestThumbnail.url, // Add thumbnail
-      }));
+    const result = await ytSearch(query);
+    const videos = result.videos.slice(0, 25).map((video) => ({
+      id: video.videoId,
+      title: video.title,
+      url: video.url,
+      thumbnail: video.thumbnail,
+    }));
 
     res.status(200).json({ videos });
   } catch (error) {
