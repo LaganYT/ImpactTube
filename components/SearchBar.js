@@ -8,9 +8,21 @@ export default function SearchBar({ onSearch }) {
   };
 
   const handleSearch = () => {
+    if (!query.trim()) {
+      alert('Search query cannot be empty');
+      return;
+    }
+
+    if (!onSearch) {
+      alert('Search function is not provided');
+      return;
+    }
+
     try {
       onSearch(query);
+      setQuery('');
     } catch (error) {
+      alert('An error occurred while searching');
       console.error(error);
     }
   };
