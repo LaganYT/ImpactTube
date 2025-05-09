@@ -63,7 +63,7 @@ export default function Watch() {
             <p>
               {' '}
               <a
-                href={`${videoData.author.id}`}
+                href={videoData.author.url} // Use author.url directly
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: '#4EA8DE' }}

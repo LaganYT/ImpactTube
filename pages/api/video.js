@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         result.description = result.description.replace(/\n/g, '<br>');
       }
       if (result.author) {
-        result.author.id = result.author.channelId; // Use channelId directly from yt-search
+        result.author.url = result.author.url; // Pass the author URL directly
       }
       return res.status(200).json(result); // Return the modified video details
     } else {
