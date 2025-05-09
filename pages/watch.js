@@ -18,7 +18,11 @@ export default function Watch() {
       try {
         const response = await fetch(`/api/video?videoId=${v}`);
         if (!response.ok) {
-          throw new Error('Failed to fetch video details');
+          if (response.status === 404) {
+            throw new Error('Video not found');
+          } else {
+            throw new Error('Failed to fetch video details');
+          }
         }
         const data = await response.json();
         setVideoData(data);
