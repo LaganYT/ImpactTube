@@ -35,8 +35,6 @@ export default function Home() {
 
   return (
     <div className="container">
-      <h1 className="title">ImpactTube</h1>
-      <SearchBar onSearch={handleSearch} />
       <VideoList videos={videos} onVideoClick={handleVideoClick} />
       {selectedVideoUrl && (
         <div className="video-player">
