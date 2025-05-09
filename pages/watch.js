@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import ytSearch from 'yt-search';
-import cheerio from 'cheerio';
 
 export default function Watch() {
   const router = useRouter();
@@ -14,20 +12,20 @@ export default function Watch() {
     if (!v) return;
 
     const fetchVideoDetails = async () => {
-      setLoading(true);  // Start loading
+      setLoading(true); // Start loading
       setError(null); // Clear previous errors
 
       try {
-        const res = await ytSearch({ videoId: v }); // Ensure yt-search returns a video response
-        if (res && res.videos && res.videos.length > 0) {
-          setVideoData(res.videos[0]); // Assuming the first video is the correct one
-        } else {
-          setError('Video not found');
+        const response = await fetch(`/api/video?videoId=${v}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch video details');
         }
+        const data = await response.json();
+        setVideoData(data);
       } catch (err) {
-        setError('Failed to fetch video data');
+        setError(err.message || 'Failed to fetch video data');
       } finally {
-        setLoading(false);  // Stop loading
+        setLoading(false); // Stop loading
       }
     };
 
