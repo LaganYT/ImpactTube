@@ -14,7 +14,7 @@ export default function Home() {
 
   const fetchRandomVideos = async () => {
     try {
-      const response = await fetch('/api/search?query=random');
+      const response = await fetch('/api/search?query=mr beast');
       if (!response.ok) {
         throw new Error('Failed to fetch random videos');
       }
