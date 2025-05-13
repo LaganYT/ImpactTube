@@ -27,6 +27,12 @@ export default function Playlist() {
     }
   };
 
+  const handleVideoEnd = () => {
+    if (currentVideoIndex < videos.length - 1) {
+      setCurrentVideoIndex(currentVideoIndex + 1);
+    }
+  };
+
   const handleVideoClick = (index) => {
     setCurrentVideoIndex(index);
   };
@@ -39,10 +45,18 @@ export default function Playlist() {
             <iframe
               width="100%"
               height="100%"
-              src={`https://www.youtube-nocookie.com/embed/${videos[currentVideoIndex].id}`}
+              src={`https://www.youtube-nocookie.com/embed/${videos[currentVideoIndex].id}?autoplay=1&enablejsapi=1`}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              onLoad={() => {
+                const iframe = document.querySelector('iframe');
+                iframe.contentWindow.postMessage(
+                  '{"event":"command","func":"addEventListener","args":["onStateChange"]}',
+                  '*'
+                );
+              }}
+              onEnded={handleVideoEnd}
             ></iframe>
           </div>
           <div className="playlist-queue">
@@ -70,13 +84,14 @@ export default function Playlist() {
       <style jsx>{`
         .playlist-container {
           display: flex;
-          height: 100vh;
+          height: 90vh;
           background-color: #181818;
           color: white;
         }
         .video-player {
           flex: 3;
           background-color: black;
+          height: 100%;
         }
         .playlist-queue {
           flex: 1;
