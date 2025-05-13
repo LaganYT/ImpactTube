@@ -14,12 +14,21 @@ export default function Home() {
 
   const fetchRandomVideos = async () => {
     try {
-      const response = await fetch('/api/search?query=mrbeast');
-      if (!response.ok) {
+      // Fetch a random word
+      const wordResponse = await fetch('https://random-word-api.herokuapp.com/word');
+      if (!wordResponse.ok) {
+        throw new Error('Failed to fetch random word');
+      }
+      const wordData = await wordResponse.json();
+      const randomWord = wordData[0];
+
+      // Use the random word in the search query
+      const videoResponse = await fetch(`/api/search?query=${encodeURIComponent(randomWord)}`);
+      if (!videoResponse.ok) {
         throw new Error('Failed to fetch random videos');
       }
-      const data = await response.json();
-      setVideos(data.videos);
+      const videoData = await videoResponse.json();
+      setVideos(videoData.videos);
     } catch (error) {
       console.error('Error fetching random videos:', error);
     }
