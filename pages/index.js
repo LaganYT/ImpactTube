@@ -36,8 +36,16 @@ export default function Home() {
 
   const handleSearch = (query) => {
     const playlistRegex = /[?&]list=([^&]+)/;
-    const match = query.match(playlistRegex);
 
+    if (query.startsWith('https://www.youtube.com/playlist?list=')) {
+      const playlistId = query.match(playlistRegex)?.[1];
+      if (playlistId) {
+        router.push(`/playlist/${encodeURIComponent(playlistId)}`);
+        return;
+      }
+    }
+
+    const match = query.match(playlistRegex);
     if (match) {
       const playlistId = match[1];
       router.push(`/playlist/${encodeURIComponent(playlistId)}`);
