@@ -35,7 +35,15 @@ export default function Home() {
   };
 
   const handleSearch = (query) => {
-    router.push(`/search/${encodeURIComponent(query)}`);
+    const playlistRegex = /[?&]list=([^&]+)/;
+    const match = query.match(playlistRegex);
+
+    if (match) {
+      const playlistId = match[1];
+      router.push(`/playlist/${encodeURIComponent(playlistId)}`);
+    } else {
+      router.push(`/search/${encodeURIComponent(query)}`);
+    }
   };
 
   const handleVideoClick = (url, isPlaylist = false) => {

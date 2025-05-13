@@ -173,3 +173,77 @@ input {
 input::placeholder {
   color: #888888;
 }
+
+/* Playlist Page Styles */
+.playlist-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+}
+
+.video-section {
+  flex: 3;
+}
+
+.queue-section {
+  flex: 1;
+  background-color: #202020;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.queue-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.queue-item:hover {
+  background-color: #333;
+}
+
+.queue-item.active {
+  background-color: #444;
+}
+
+.queue-item img {
+  width: 80px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.queue-item-info {
+  flex: 1;
+}
+
+.queue-item-title {
+  font-size: 14px;
+  color: #fff;
+}
+
+.video-controls {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-controls button {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.video-controls button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
