@@ -6,7 +6,7 @@ export default function VideoList({ videos, onVideoClick }) {
       {videos.map((video) => (
         <div key={video.id} className="video-item">
           <img src={video.thumbnail} alt={video.title} />
-          <Link href={`/watch?v=${video.id}`}>
+          <Link href={video.isPlaylist ? `/playlist?playlistId=${video.id}` : `/watch?v=${video.id}`}>
             {video.title}
           </Link>
         </div>

@@ -38,8 +38,12 @@ export default function Home() {
     router.push(`/search/${encodeURIComponent(query)}`);
   };
 
-  const handleVideoClick = (url) => {
-    setSelectedVideoUrl(url);
+  const handleVideoClick = (url, isPlaylist = false) => {
+    if (isPlaylist) {
+      router.push(`/playlist?playlistId=${url}`);
+    } else {
+      setSelectedVideoUrl(url);
+    }
   };
 
   return (
