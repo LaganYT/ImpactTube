@@ -92,6 +92,7 @@ export default function Playlist() {
           flex: 3;
           background-color: black;
           height: 100%;
+          margin-top: 0; /* Remove top margin */
         }
         .playlist-queue {
           flex: 1;
