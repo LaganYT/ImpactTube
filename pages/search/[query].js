@@ -9,6 +9,16 @@ export default function SearchResults() {
 
   useEffect(() => {
     if (query) {
+      // Redirect to playlist player if query is a playlist URL
+      if (query.startsWith('https://www.youtube.com/playlist?list=')) {
+        const playlistRegex = /[?&]list=([^&]+)/;
+        const playlistId = query.match(playlistRegex)?.[1];
+        if (playlistId) {
+          router.push(`/playlist/${encodeURIComponent(playlistId)}`);
+          return;
+        }
+      }
+
       fetchVideos(query).then(setVideos).catch(console.error);
     }
   }, [query]);
