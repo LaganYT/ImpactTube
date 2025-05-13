@@ -84,7 +84,7 @@ export default function Playlist() {
       <style jsx>{`
         .playlist-container {
           display: flex;
-          height: 90vh;
+          height: 85vh;
           background-color: #181818;
           color: white;
         }
