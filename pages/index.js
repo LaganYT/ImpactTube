@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import SearchBar from '../components/SearchBar';
 import VideoList from '../components/VideoList';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
-  const [selectedVideoUrl, setSelectedVideoUrl] = useState('');
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -14,7 +13,8 @@ export default function Home() {
 
   const fetchRandomVideos = async () => {
     try {
-      // Fetch a random word
+      setLoading(true);
+      // Fetch a random word for variety
       const wordResponse = await fetch('https://random-word-api.herokuapp.com/word');
       if (!wordResponse.ok) {
         throw new Error('Failed to fetch random word');
@@ -28,55 +28,75 @@ export default function Home() {
         throw new Error('Failed to fetch random videos');
       }
       const videoData = await videoResponse.json();
-      setVideos(videoData.videos);
+      setVideos(videoData.videos.slice(0, 12)); // Limit to 12 videos for homepage
     } catch (error) {
       console.error('Error fetching random videos:', error);
+      // Fallback: fetch popular videos
+      fetchPopularVideos();
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleSearch = (query) => {
-    const playlistRegex = /[?&]list=([^&]+)/;
-
-    if (query.startsWith('https://www.youtube.com/playlist?list=')) {
-      const playlistId = query.match(playlistRegex)?.[1];
-      if (playlistId) {
-        router.push(`/playlist/${encodeURIComponent(playlistId)}`);
-        return;
+  const fetchPopularVideos = async () => {
+    try {
+      const response = await fetch('/api/search?query=popular');
+      if (response.ok) {
+        const data = await response.json();
+        setVideos(data.videos.slice(0, 12));
       }
-    }
-
-    const match = query.match(playlistRegex);
-    if (match) {
-      const playlistId = match[1];
-      router.push(`/playlist/${encodeURIComponent(playlistId)}`);
-    } else {
-      router.push(`/search/${encodeURIComponent(query)}`);
+    } catch (error) {
+      console.error('Error fetching popular videos:', error);
     }
   };
 
-  const handleVideoClick = (url, isPlaylist = false) => {
-    if (isPlaylist) {
-      router.push(`/playlist?playlistId=${url}`);
-    } else {
-      setSelectedVideoUrl(url);
-    }
+
+  const handleVideoClick = (videoId) => {
+    router.push(`/watch?v=${videoId}`);
   };
 
   return (
-    <div className="container">
-      <VideoList videos={videos} onVideoClick={handleVideoClick} />
-      {selectedVideoUrl && (
-        <div className="video-player">
-          <iframe
-            width="560"
-            height="315"
-            src={selectedVideoUrl}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="container">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Discover Amazing Content
+            </h1>
+            <p className="hero-subtitle">
+              Explore millions of videos, playlists, and channels from around the world
+            </p>
+
+          </div>
         </div>
-      )}
+      </section>
+
+      {/* Featured Videos Section */}
+      <section className="featured-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Featured Videos</h2>
+            <p>Discover trending and popular content curated just for you</p>
+          </div>
+
+          {loading ? (
+            <div className="loading-grid">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="video-skeleton">
+                  <div className="skeleton thumbnail"></div>
+                  <div className="skeleton title"></div>
+                  <div className="skeleton meta"></div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="fade-in">
+              <VideoList videos={videos} onVideoClick={handleVideoClick} />
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

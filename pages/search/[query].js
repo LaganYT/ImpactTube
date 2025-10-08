@@ -37,10 +37,19 @@ export default function SearchResults() {
     }
   };
 
+  const handleVideoClick = (videoId) => {
+    router.push(`/watch?v=${videoId}`);
+  };
+
   return (
-    <div>
-      <h1>Search Results for "{query}"</h1>
-      <VideoList videos={videos} onVideoClick={() => {}} />
+    <div className="search-results-page">
+      <div className="container">
+        <div className="search-header">
+          <h1>Search Results for "{query}"</h1>
+          <p className="search-count">{videos.length} videos found</p>
+        </div>
+        <VideoList videos={videos} onVideoClick={handleVideoClick} />
+      </div>
     </div>
   );
 }

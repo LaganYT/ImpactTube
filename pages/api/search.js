@@ -14,6 +14,8 @@ export default async function handler(req, res) {
       title: video.title,
       url: video.url,
       thumbnail: video.thumbnail,
+      duration: video.duration?.timestamp || '0:00',
+      viewCount: video.views,
     }));
 
     res.status(200).json({ videos });
