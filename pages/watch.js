@@ -63,11 +63,7 @@ export default function Watch() {
             {/* Main Video Player - Show error overlay */}
             <div className="main-video">
               <div className="video-player">
-                <lite-youtube
-                  videoid={v}
-                  params="autoplay=0"
-                  style={{ maxWidth: '100%' }}
-                ></lite-youtube>
+               <iframe src={`https://www.youtube-nocookie.com/embed/${v}?autoplay=1`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="video-iframe"></iframe>
                 <div className="video-error-overlay">
                   <div className="error-state">
                     <h2>Video Not Available</h2>
@@ -92,11 +88,7 @@ export default function Watch() {
           {/* Main Video Player - Shows immediately */}
           <div className="main-video">
             <div className="video-player">
-              <lite-youtube
-                videoid={v}
-                params="autoplay=1"
-                style={{ maxWidth: '100%' }}
-              ></lite-youtube>
+              <iframe src={`https://www.youtube-nocookie.com/embed/${v}?autoplay=1`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="video-iframe"></iframe>
             </div>
 
             {/* Video Info - Shows loading skeleton or actual content */}
