@@ -15,6 +15,7 @@
     "@distube/ytsr": "latest",
     "cheerio": "latest",
     "react-icons": "latest",
-    "yt-search": "latest"
+    "yt-search": "latest",
+    "lite-youtube-embed": "latest"
   }
 }

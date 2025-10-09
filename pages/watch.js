@@ -89,12 +89,11 @@ export default function Watch() {
           {/* Main Video Player */}
           <div className="main-video">
             <div className="video-player">
-              <iframe
-                src={`https://www.youtube-nocookie.com/embed/${v}?autoplay=1`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              <lite-youtube 
+                videoid={v} 
+                params="autoplay=1"
+                style={{ maxWidth: '100%' }}
+              ></lite-youtube>
             </div>
 
             {videoData && (
