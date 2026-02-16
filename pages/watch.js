@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+// Common stop words to filter out when extracting key terms
+const STOP_WORDS = ['the', 'and', 'for', 'with', 'from', 'that', 'this', 'have', 'are', 'was', 'were', 'been', 'has'];
+
 export default function Watch() {
   const router = useRouter();
   const { v } = router.query;
@@ -37,7 +40,7 @@ export default function Watch() {
         // Fetch related videos - improved algorithm
         // Extract key terms from video title for better recommendations
         const titleWords = data.title.split(' ').filter(word => 
-          word.length > 3 && !['the', 'and', 'for', 'with'].includes(word.toLowerCase())
+          word.length > 3 && !STOP_WORDS.includes(word.toLowerCase())
         );
         const searchTerms = titleWords.slice(0, 3).join(' ');
         

@@ -23,11 +23,11 @@ export default async function handler(req, res) {
       title: video.title,
       url: video.url,
       thumbnail: video.thumbnail,
-      duration: video.duration?.timestamp || video.timestamp || '0:00',
+      duration: video.duration?.timestamp || '0:00',
       viewCount: video.views,
       author: {
         name: video.author?.name || 'Unknown',
-        url: video.author?.url || video.author?.channel_url || '#',
+        url: video.author?.url || video.author?.channel_url || '',
         verified: video.author?.verified || false
       },
       uploadedAt: video.ago || video.uploadedAt || '',
