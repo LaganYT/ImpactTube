@@ -18,21 +18,36 @@ export default function Home() {
     try {
       setLoading(true);
       setHasMore(true); // Reset hasMore when refreshing
-      // Fetch a random word for variety
-      const wordResponse = await fetch('https://random-word-api.herokuapp.com/word');
-      if (!wordResponse.ok) {
-        throw new Error('Failed to fetch random word');
-      }
-      const wordData = await wordResponse.json();
-      const randomWord = wordData[0];
+      
+      // Improved algorithm: Use diverse trending topics instead of random words
+      const trendingTopics = [
+        'trending music videos',
+        'viral videos today',
+        'top gaming highlights',
+        'popular tech reviews',
+        'funny moments compilation',
+        'educational content',
+        'cooking recipes',
+        'workout tutorials',
+        'travel vlogs',
+        'movie trailers',
+        'sports highlights',
+        'diy projects',
+        'comedy sketches',
+        'science experiments',
+        'fashion trends'
+      ];
+      
+      // Select a random trending topic
+      const randomTopic = trendingTopics[Math.floor(Math.random() * trendingTopics.length)];
 
-      // Use the random word in the search query
-      const videoResponse = await fetch(`/api/search?query=${encodeURIComponent(randomWord)}`);
+      // Use the trending topic in the search query
+      const videoResponse = await fetch(`/api/search?query=${encodeURIComponent(randomTopic)}`);
       if (!videoResponse.ok) {
         throw new Error('Failed to fetch random videos');
       }
       const videoData = await videoResponse.json();
-      setVideos(videoData.videos.slice(0, 12)); // Limit to 12 videos for homepage
+      setVideos(videoData.videos.slice(0, 20)); // Show more videos (20 instead of 12)
     } catch (error) {
       console.error('Error fetching random videos:', error);
       // Fallback: fetch popular videos
@@ -61,21 +76,27 @@ export default function Home() {
     try {
       setLoadingMore(true);
 
-      // Fetch more random videos
-      const wordResponse = await fetch('https://random-word-api.herokuapp.com/word');
-      if (!wordResponse.ok) {
-        throw new Error('Failed to fetch random word');
-      }
-      const wordData = await wordResponse.json();
-      const randomWord = wordData[0];
+      // Improved algorithm: Use diverse content categories
+      const categories = [
+        'latest uploads',
+        'popular today',
+        'recommended for you',
+        'trending now',
+        'most viewed this week',
+        'new releases',
+        'top rated',
+        'featured content'
+      ];
+      
+      const randomCategory = categories[Math.floor(Math.random() * categories.length)];
 
-      const videoResponse = await fetch(`/api/search?query=${encodeURIComponent(randomWord)}`);
+      const videoResponse = await fetch(`/api/search?query=${encodeURIComponent(randomCategory)}`);
       if (!videoResponse.ok) {
         throw new Error('Failed to fetch more videos');
       }
 
       const videoData = await videoResponse.json();
-      const newVideos = videoData.videos.slice(0, 12);
+      const newVideos = videoData.videos.slice(0, 20);
 
       // Only add videos if we got some back
       if (newVideos.length > 0) {

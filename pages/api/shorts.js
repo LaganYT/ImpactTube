@@ -5,31 +5,47 @@ export default async function handler(req, res) {
   const requestedCount = Math.min(parseInt(count), 50); // Cap at 50 for performance
 
   try {
-    // Diverse search strategies for better variety
-    const searchStrategies = [
-      // Popular hashtags
-      '#shorts', '#viral', '#trending', '#fyp', '#foryou',
-      // Categories
-      'funny', 'comedy', 'dance', 'music', 'gaming', 'tutorial', 'life hacks',
-      'amazing', 'satisfying', 'cooking', 'art', 'fitness', 'pets', 'travel',
-      // Time-based trending
-      'today', 'this week', 'latest', 'new',
-      // Entertainment
-      'pranks', 'challenges', 'reactions', 'animation', 'magic tricks',
-      'sports highlights', 'motivational', 'facts', 'science', 'tech'
+    // Improved algorithm: More targeted short-form content categories
+    const shortsCategories = [
+      // High-engagement shorts categories
+      { term: 'funny shorts', weight: 3 },
+      { term: 'viral shorts', weight: 3 },
+      { term: 'trending shorts', weight: 3 },
+      { term: 'comedy shorts', weight: 2 },
+      { term: 'dance shorts', weight: 2 },
+      { term: 'music shorts', weight: 2 },
+      { term: 'gaming shorts', weight: 2 },
+      { term: 'tutorial shorts', weight: 2 },
+      { term: 'life hack shorts', weight: 2 },
+      { term: 'satisfying shorts', weight: 2 },
+      { term: 'cooking shorts', weight: 1 },
+      { term: 'art shorts', weight: 1 },
+      { term: 'fitness shorts', weight: 1 },
+      { term: 'pet shorts', weight: 1 },
+      { term: 'travel shorts', weight: 1 },
+      { term: 'prank shorts', weight: 1 },
+      { term: 'challenge shorts', weight: 1 },
+      { term: 'reaction shorts', weight: 1 },
+      { term: 'animation shorts', weight: 1 },
+      { term: 'magic shorts', weight: 1 },
+      { term: 'sports shorts', weight: 1 },
+      { term: 'motivational shorts', weight: 1 }
     ];
 
-    // Add some randomness with combined terms occasionally
-    const useDoubleSearch = Math.random() > 0.7;
-    let searchTerm;
+    // Weighted random selection for better variety
+    const totalWeight = shortsCategories.reduce((sum, cat) => sum + cat.weight, 0);
+    let random = Math.random() * totalWeight;
+    let selectedCategory = shortsCategories[0].term;
     
-    if (useDoubleSearch && searchStrategies.length > 1) {
-      const term1 = searchStrategies[Math.floor(Math.random() * searchStrategies.length)];
-      const term2 = searchStrategies[Math.floor(Math.random() * searchStrategies.length)];
-      searchTerm = term1 !== term2 ? `${term1} ${term2}` : term1;
-    } else {
-      searchTerm = searchStrategies[Math.floor(Math.random() * searchStrategies.length)];
+    for (const category of shortsCategories) {
+      random -= category.weight;
+      if (random <= 0) {
+        selectedCategory = category.term;
+        break;
+      }
     }
+    
+    const searchTerm = selectedCategory;
 
     const result = await ytSearch(searchTerm);
 

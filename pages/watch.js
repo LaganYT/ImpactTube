@@ -34,11 +34,18 @@ export default function Watch() {
         const data = await response.json();
         setVideoData(data);
 
-        // Fetch related videos
-        const relatedResponse = await fetch(`/api/search?query=${encodeURIComponent(data.title)}`);
+        // Fetch related videos - improved algorithm
+        // Extract key terms from video title for better recommendations
+        const titleWords = data.title.split(' ').filter(word => 
+          word.length > 3 && !['the', 'and', 'for', 'with'].includes(word.toLowerCase())
+        );
+        const searchTerms = titleWords.slice(0, 3).join(' ');
+        
+        const relatedResponse = await fetch(`/api/search?query=${encodeURIComponent(searchTerms || data.title)}`);
         if (relatedResponse.ok) {
           const relatedData = await relatedResponse.json();
-          setRelatedVideos(relatedData.videos.filter(video => video.id !== v).slice(0, 8));
+          // Filter out current video and limit to 12 related videos
+          setRelatedVideos(relatedData.videos.filter(video => video.id !== v).slice(0, 12));
         }
       } catch (err) {
         setError(err.message || 'Failed to fetch video data');
