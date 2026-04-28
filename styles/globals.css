@@ -2307,3 +2307,131 @@ lite-youtube.short-iframe {
     font-size: 1rem;
   }
 }
+
+/* Channel Experience */
+.channel-inline-link,
+.related-channel-link,
+.short-author,
+.channel-link {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.channel-inline-link:hover,
+.related-channel-link:hover,
+.short-author:hover,
+.channel-link:hover {
+  color: #fff;
+}
+
+.subscribe-btn {
+  border: none;
+  border-radius: 999px;
+  background: var(--youtube-red);
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.subscribe-btn:hover {
+  background: var(--youtube-red-hover);
+}
+
+.watch-subscribe {
+  margin-left: 0.75rem;
+  font-size: 0.8125rem;
+  padding: 0.4rem 0.9rem;
+}
+
+.channel-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.channel-banner {
+  height: 180px;
+  width: 100%;
+  background: linear-gradient(120deg, #1f2937 0%, #111827 45%, #dc2626 100%);
+  border-radius: 0 0 18px 18px;
+}
+
+.channel-header {
+  margin-top: -48px;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.channel-avatar-wrap {
+  width: 96px;
+  height: 96px;
+}
+
+.channel-avatar,
+.channel-avatar-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  background: #1f2937;
+}
+
+.channel-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.channel-details h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.channel-stats,
+.channel-description {
+  color: var(--text-secondary);
+}
+
+.channel-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.channel-videos {
+  padding: 1.5rem;
+}
+
+.channel-videos h2 {
+  margin-bottom: 1rem;
+}
+
+.channel-loading,
+.channel-error,
+.channel-empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .channel-header {
+    grid-template-columns: 1fr;
+    margin-top: -32px;
+  }
+
+  .channel-actions {
+    justify-content: flex-start;
+  }
+
+  .channel-banner {
+    height: 130px;
+  }
+}

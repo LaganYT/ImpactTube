@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -115,14 +116,13 @@ export default function Watch() {
 
                   <div className="video-meta">
                     <div className="channel-info">
-                      <a
-                        href={videoData.author.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href={`/channel/${encodeURIComponent(videoData.author.name)}?url=${encodeURIComponent(videoData.author.url || '')}`}
                         className="channel-link"
                       >
                         <span dangerouslySetInnerHTML={{ __html: videoData.author.name }}></span>
-                      </a>
+                      </Link>
+                      <button className="subscribe-btn watch-subscribe">Subscribe</button>
                       {videoData.viewCount && (
                         <span className="view-count">
                           • {videoData.viewCount} views
@@ -166,6 +166,13 @@ export default function Watch() {
                     <img src={video.thumbnail} alt={video.title} />
                     <div className="related-content">
                       <h4 className="related-title">{video.title}</h4>
+                      <Link
+                        href={`/channel/${encodeURIComponent(video.author?.name || 'Unknown')}?url=${encodeURIComponent(video.author?.url || '')}`}
+                        className="related-channel-link"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {video.author?.name || 'Unknown'}
+                      </Link>
                       <div className="related-meta">
                         <span>{video.duration || '0:00'}</span>
                         {video.viewCount && (

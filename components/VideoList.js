@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function VideoList({ videos, onVideoClick }) {
   return (
     <div className="video-list">
@@ -19,13 +21,13 @@ export default function VideoList({ videos, onVideoClick }) {
             <div className="video-item-meta">
               {video.author?.name && (
                 <div className="video-author">
-                  {video.author.url ? (
-                    <a href={video.author.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                      <span>{video.author.name}</span>
-                    </a>
-                  ) : (
+                  <Link
+                    href={`/channel/${encodeURIComponent(video.author.name)}?url=${encodeURIComponent(video.author.url || '')}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="channel-inline-link"
+                  >
                     <span>{video.author.name}</span>
-                  )}
+                  </Link>
                   {video.author.verified && (
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="verified-badge" aria-label="Verified channel">
                       <title>Verified channel</title>
