@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
@@ -209,14 +210,12 @@ export default function Shorts() {
                 <div className="short-info">
                   <h3 className="short-title">{short.title}</h3>
                   <div className="short-meta">
-                    <a
-                      href={short.author.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href={`/channel/${encodeURIComponent(short.author.name)}?url=${encodeURIComponent(short.author.url || '')}`}
                       className="short-author"
                     >
                       {short.author.name}
-                    </a>
+                    </Link>
                     {short.viewCount && (
                       <span className="short-views">
                         {short.viewCount} views
