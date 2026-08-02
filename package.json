@@ -8,14 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "15.5.18",
+    "@distube/ytsr": "latest",
+    "axios": "1.19.0",
+    "cheerio": "latest",
+    "lite-youtube-embed": "latest",
+    "next": "16.2.12",
     "react": "latest",
     "react-dom": "latest",
-    "axios": "1.16.0",
-    "@distube/ytsr": "latest",
-    "cheerio": "latest",
     "react-icons": "latest",
-    "yt-search": "latest",
-    "lite-youtube-embed": "latest"
+    "yt-search": "latest"
   }
 }
