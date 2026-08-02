@@ -16,6 +16,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "latest",
+    "styled-jsx": "^5.1.7",
     "yt-search": "latest"
   }
 }
