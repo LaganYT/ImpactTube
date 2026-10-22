@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "@distube/ytsr": "latest",
-    "axios": "1.19.0",
+    "axios": "1.20.0",
     "cheerio": "latest",
     "lite-youtube-embed": "latest",
-    "next": "16.2.12",
+    "next": "16.4.2",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "latest",
