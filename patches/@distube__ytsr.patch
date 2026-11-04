@@ -1,0 +1,26 @@
+diff --git a/lib/parseItem.js b/lib/parseItem.js
+index 4ca33b7b656d334b02475ed41bbdae799ba1145d..1ca7b93a9ebed999e7949b11717d249081ac5748 100755
+--- a/lib/parseItem.js
++++ b/lib/parseItem.js
+@@ -55,7 +55,7 @@ const _parseAuthor = obj => {
+   const isOfficial = !!(ownerBadgesString && ownerBadgesString.includes('OFFICIAL'));
+   const isVerified = !!(ownerBadgesString && ownerBadgesString.includes('VERIFIED'));
+   const author = obj.ownerText && obj.ownerText.runs[0];
+-  if (!author || !author.navigationEndpoint) return null;
++  if (!author || !author.navigationEndpoint || !author.navigationEndpoint.browseEndpoint) return null;
+   const authorUrl =
+     author.navigationEndpoint.browseEndpoint.canonicalBaseUrl ||
+     author.navigationEndpoint.commandMetadata.webCommandMetadata.url;
+diff --git a/lib/util.js b/lib/util.js
+index 709795bd8cbeec83460d523e478adaf259788c94..d83c688047cf73892b4398826d4984804a8d3b4f 100755
+--- a/lib/util.js
++++ b/lib/util.js
+@@ -274,7 +274,7 @@ const setPropInsensitive = (obj, prop, value) => {
+ };
+ 
+ const dumpDir = PATH.resolve(__dirname, '../dumps/');
+-if (FS.existsSync(dumpDir)) FS.rmdirSync(dumpDir, { recursive: true });
++if (FS.existsSync(dumpDir)) FS.rmSync(dumpDir, { recursive: true, force: true });
+ 
+ exports.logger = content => {
+   const file = PATH.resolve(dumpDir, `${Date.now()}-${Math.random().toString(36).slice(3)}.txt`);

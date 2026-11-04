@@ -9,13 +9,16 @@ overrides:
   postcss: ^8.5.18
   sharp: ^0.35.0
 
+patchedDependencies:
+  '@distube/ytsr': 108580113871e1c8da2892ecd156be97524b1af26bc966eef50e72f4b37d1881
+
 importers:
 
   .:
     dependencies:
       '@distube/ytsr':
         specifier: latest
-        version: 2.0.4
+        version: 2.0.4(patch_hash=108580113871e1c8da2892ecd156be97524b1af26bc966eef50e72f4b37d1881)
       axios:
         specifier: 1.20.0
         version: 1.20.0(debug@4.4.3)
@@ -716,7 +719,7 @@ packages:
 
 snapshots:
 
-  '@distube/ytsr@2.0.4':
+  '@distube/ytsr@2.0.4(patch_hash=108580113871e1c8da2892ecd156be97524b1af26bc966eef50e72f4b37d1881)':
     dependencies:
       undici: 6.29.1
 
